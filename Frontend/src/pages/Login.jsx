@@ -56,7 +56,7 @@ export default function Login() {
             </label>
           </div>
 
-          <Button className="!mt-0 h-11 w-full !rounded-lg !bg-black !text-white hover:!bg-zinc-800" size="lg" type="submit" disabled={submitting}>
+          <Button className="!mt-4 h-11 w-full !rounded-lg !bg-black !text-white hover:!bg-zinc-800" size="lg" type="submit" disabled={submitting}>
             {submitting ? "Logging in…" : "Log in"}
           </Button>
 

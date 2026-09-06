@@ -54,7 +54,7 @@ export default function Register() {
             <label className="!gap-2 !text-sm !font-medium !text-zinc-900">Password<input className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 focus:!border-black focus:!ring-1 focus:!ring-black" type="password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={8} required /></label>
           </div>
 
-          <Button className="!mt-0 h-11 w-full !rounded-lg !bg-black !text-white hover:!bg-zinc-800" size="lg" type="submit" disabled={submitting}>{submitting ? "Creating account…" : "Create account"}</Button>
+          <Button className="!mt-4 h-11 w-full !rounded-lg !bg-black !text-white hover:!bg-zinc-800" size="lg" type="submit" disabled={submitting}>{submitting ? "Creating account…" : "Create account"}</Button>
 
           <p className="text-center text-sm text-muted-foreground">Already have an account? <Link className="font-medium text-foreground underline-offset-4 hover:underline" to="/login">Log in</Link></p>
         </form>
