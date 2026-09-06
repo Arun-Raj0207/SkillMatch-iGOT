@@ -256,11 +256,14 @@ async function handleSubmit(e) {
   if (loading) return <div className="page-center">Loading your profile...</div>;
 
   return (
-    <div className="form-page">
+    <div className="form-page skillmatch-profile">
       <form className="profile-card" onSubmit={handleSubmit}>
-        <h1>Tell us about your role</h1>
-        <p className="auth-subtitle">
-          This replaces a resume upload — it's what the skill-gap assessment runs against.
+        <div>
+          <p className="text-sm text-muted-foreground">SkillMatch · Official profile</p>
+          <h1 className="mt-1 text-2xl font-bold tracking-tight">Tell us about your role</h1>
+        </div>
+        <p className="auth-subtitle text-sm text-muted-foreground">
+          This profile powers your competency assessment and learning recommendations.
         </p>
 
         {error && <div className="form-error">{error}</div>}

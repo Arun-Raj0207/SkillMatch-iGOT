@@ -1,3 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 10% 3.9%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+}
+
 :root {
   --navy: #0f2a3f;
   --teal: #1e8d86;
@@ -449,4 +496,55 @@ button.secondary:hover:not(:disabled) {
   color: var(--gray-600);
   font-size: 0.9rem;
   margin-top: 20px;
+}
+
+/* New SkillMatch screens use shadcn-style primitives without changing the
+   existing form classes used by the original auth/profile implementation. */
+.skillmatch-profile {
+  background: hsl(var(--muted) / 0.4) !important;
+}
+
+.skillmatch-profile .profile-card {
+  max-width: 960px !important;
+  border-color: hsl(var(--border)) !important;
+  border-radius: 0.75rem !important;
+  background: hsl(var(--background)) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+.skillmatch-profile .profile-card > label,
+.skillmatch-profile .profile-card > .form-row label {
+  color: hsl(var(--foreground));
+}
+
+.skillmatch-profile .profile-card input:not(.searchable-input),
+.skillmatch-profile .profile-card textarea,
+.skillmatch-profile .profile-card select {
+  border-color: hsl(var(--input)) !important;
+  border-radius: 0.375rem !important;
+  background: hsl(var(--background)) !important;
+  box-shadow: none !important;
+}
+
+.skillmatch-profile .profile-card input:not(.searchable-input):focus,
+.skillmatch-profile .profile-card textarea:focus,
+.skillmatch-profile .profile-card select:focus {
+  outline: none !important;
+  border-color: hsl(var(--ring)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.15) !important;
+}
+
+.skillmatch-profile .profile-card .skills-fieldset {
+  border-color: hsl(var(--border));
+}
+
+.skillmatch-profile .profile-card .checkbox-item {
+  border-color: hsl(var(--border));
+  background: hsl(var(--background));
+}
+
+.skillmatch-profile .profile-card > button[type="submit"] {
+  margin-top: 0;
+  border-radius: 0.375rem;
+  background: hsl(var(--primary));
 }
