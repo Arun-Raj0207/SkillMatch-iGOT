@@ -214,7 +214,14 @@ export default function Dashboard() {
                     {courses.map((course) => (
                       <div key={course.id} className="rounded-md border p-4">
                         <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="font-semibold">{course.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{course.description}</p></div><Badge variant="secondary">{course.level}</Badge></div>
-                        <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground"><span>{course.durationWeeks} weeks</span>{Array.isArray(course.matchedGaps) && course.matchedGaps.map((gap) => <Badge key={gap} variant="outline">{gap}</Badge>)}</div>
+                        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground"><span>{course.durationWeeks} weeks</span>{Array.isArray(course.matchedGaps) && course.matchedGaps.map((gap) => <Badge key={gap} variant="outline">{gap}</Badge>)}</div>
+                          {course.sourceUrl && (
+                            <Button variant="outline" size="sm" asChild>
+                              <a href={course.sourceUrl} target="_blank" rel="noopener noreferrer">View on iGOT</a>
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </CardContent>

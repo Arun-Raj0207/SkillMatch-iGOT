@@ -1,9 +1,4 @@
-// Stand-in for a live NSSTA/iGOT course feed, which isn't accessible for
-// this build. Every title here is a real, publicly announced NSSTA
-// programme (from NSSTA's official announcements and MoSPI training
-// calendars) — this is a static mock of real programme names, not
-// fabricated course titles. Swap this file for a real API client later
-// without touching anything that calls recommendCourses().
+const IGOT_PORTAL_URL = 'https://portal.igotkarmayogi.gov.in';
 
 const NSSTA_COURSE_CATALOG = [
   {
@@ -16,6 +11,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Subordinate Statistical Service (SSS)',
     level: 'Beginner',
     durationWeeks: 4,
+    sourceUrl: IGOT_PORTAL_URL,
   },
   {
     id: 'nssta-national-accounts-gdp',
@@ -26,6 +22,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Both',
     level: 'Intermediate',
     durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
   },
   {
     id: 'nssta-agri-statistics',
@@ -36,6 +33,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Indian Statistical Service (ISS)',
     level: 'Intermediate',
     durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
   },
   {
     id: 'nssta-macro-diagnostics',
@@ -46,6 +44,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Indian Statistical Service (ISS)',
     level: 'Advanced',
     durationWeeks: 3,
+    sourceUrl: IGOT_PORTAL_URL,
   },
   {
     id: 'nssta-communication-skills',
@@ -56,6 +55,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Subordinate Statistical Service (SSS)',
     level: 'Intermediate',
     durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
   },
   {
     id: 'nssta-field-enumerators',
@@ -66,6 +66,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Both',
     level: 'Beginner',
     durationWeeks: 2,
+    sourceUrl: IGOT_PORTAL_URL,
   },
   {
     id: 'nssta-census-training',
@@ -76,6 +77,7 @@ const NSSTA_COURSE_CATALOG = [
     targetCadre: 'Both',
     level: 'Beginner',
     durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
   },
 ];
 

@@ -1,16 +1,86 @@
-const { NSSTA_COURSE_CATALOG } = require('../data/nsstaCourseCatalog');
+const IGOT_PORTAL_URL = 'https://portal.igotkarmayogi.gov.in';
 
-/**
- * Matches a list of competency gaps against the mocked NSSTA catalog by tag
- * overlap and cadre relevance. Deliberately not AI-driven — this is plain
- * matching logic, which is faster, free, and fully predictable. Swap
- * NSSTA_COURSE_CATALOG for a real iGOT/NSSTA feed later without touching
- * this function's signature or callers.
- *
- * @param {Array<{domain: string, competency: string}>} gaps - e.g. assessment.topPriorityGaps
- * @param {{ service_cadre?: string }} profile
- * @returns {Array} ranked course matches, each with a matchReason
- */
+const NSSTA_COURSE_CATALOG = [
+  {
+    id: 'nssta-induction-sss',
+    title: 'Induction Training Programme for SSS Officers',
+    description:
+      'Mandatory 4-week foundational training for new Subordinate Statistical Service recruits, covering statistical tools and demographic/population analysis.',
+    domain: 'statistical',
+    tags: ['Sampling', 'Data Quality Frameworks', 'Metadata Standards'],
+    targetCadre: 'Subordinate Statistical Service (SSS)',
+    level: 'Beginner',
+    durationWeeks: 4,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+  {
+    id: 'nssta-national-accounts-gdp',
+    title: 'National Accounts & GDP Estimation',
+    description: 'Covers National Accounts, GDP estimation methodology, Economic Census, and Index of Industrial Production (IIP).',
+    domain: 'statistical',
+    tags: ['National Accounts', 'Industrial Statistics'],
+    targetCadre: 'Both',
+    level: 'Intermediate',
+    durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+  {
+    id: 'nssta-agri-statistics',
+    title: 'Agricultural and Allied Statistics with Special Focus on Agriculture Surveys',
+    description: 'Run jointly with ICAR-IASRI, covering agricultural survey design and allied statistics.',
+    domain: 'statistical',
+    tags: ['Agricultural Statistics', 'Survey Design'],
+    targetCadre: 'Indian Statistical Service (ISS)',
+    level: 'Intermediate',
+    durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+  {
+    id: 'nssta-macro-diagnostics',
+    title: 'Macroeconomic Diagnostics, Financial Programming, and Policies',
+    description: 'Run with IMF SARTTAC for ISS/IES officer trainees, covering macroeconomic analysis and financial programming.',
+    domain: 'statistical',
+    tags: ['Price Statistics', 'National Accounts'],
+    targetCadre: 'Indian Statistical Service (ISS)',
+    level: 'Advanced',
+    durationWeeks: 3,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+  {
+    id: 'nssta-communication-skills',
+    title: 'Communication Skill Development for Senior Statistical Officers',
+    description: 'Behavioural/managerial training for SSO-cadre officers within SSS.',
+    domain: 'behavioural',
+    tags: ['Communication', 'Leadership'],
+    targetCadre: 'Subordinate Statistical Service (SSS)',
+    level: 'Intermediate',
+    durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+  {
+    id: 'nssta-field-enumerators',
+    title: 'Online Certificate Course for Field Survey Enumerators',
+    description: 'Self-paced online modules for field-level survey data collection staff.',
+    domain: 'statistical',
+    tags: ['Survey Design', 'Data Quality Frameworks'],
+    targetCadre: 'Both',
+    level: 'Beginner',
+    durationWeeks: 2,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+  {
+    id: 'nssta-census-training',
+    title: 'Census Operations Training',
+    description: 'Covers census enumeration procedures and data quality for census-related field staff.',
+    domain: 'statistical',
+    tags: ['Data Quality Frameworks', 'Metadata Standards'],
+    targetCadre: 'Both',
+    level: 'Beginner',
+    durationWeeks: 1,
+    sourceUrl: IGOT_PORTAL_URL,
+  },
+];
+
 function recommendCourses(gaps, profile = {}) {
   if (!Array.isArray(gaps) || gaps.length === 0) {
     return [];
@@ -55,7 +125,8 @@ function recommendCourses(gaps, profile = {}) {
       level: course.level,
       durationWeeks: course.durationWeeks,
       matchedGaps,
+      sourceUrl: course.sourceUrl,
     }));
 }
 
-module.exports = { recommendCourses };
+module.exports = { NSSTA_COURSE_CATALOG, recommendCourses };
