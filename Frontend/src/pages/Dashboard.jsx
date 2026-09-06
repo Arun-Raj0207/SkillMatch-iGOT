@@ -230,8 +230,8 @@ export default function Dashboard() {
                 S
               </div>
 
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-400">
-                SkillMatch
+              <p className="skillmatch-brand text-lg font-extrabold uppercase tracking-[0.08em] text-gray-950">
+                SKILLMATCH
               </p>
             </div>
 
@@ -250,7 +250,7 @@ export default function Dashboard() {
             <Button
               variant="outline"
               asChild
-              className="border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
+              className="!mt-0 border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
             >
               <Link to="/profile-setup">Edit profile</Link>
             </Button>
@@ -258,7 +258,7 @@ export default function Dashboard() {
             <Button
               variant="outline"
               onClick={logout}
-              className="border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
+              className="!mt-0 border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
             >
               Log out
             </Button>
@@ -360,7 +360,7 @@ export default function Dashboard() {
 
             {/* Summary */}
             {assessment.summary && (
-              <Card className="mb-8 border-gray-200 bg-black text-white shadow-sm">
+              <Card className="mb-8 border-gray-200 !bg-black !text-white shadow-sm">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-base text-white">
                     Your assessment summary

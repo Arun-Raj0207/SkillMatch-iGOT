@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -64,6 +66,12 @@
 
 * {
   box-sizing: border-box;
+}
+
+.skillmatch-brand {
+  font-family: "Montserrat", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
 }
 
 body {
@@ -135,11 +143,11 @@ select {
   font-family: inherit;
   font-size: 0.95rem;
   padding: 10px 12px;
-  border: 1px solid rgba(30, 141, 134, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.18);
   border-radius: 8px;
   font-weight: 400;
   color: var(--text);
-  background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+  background: #ffffff;
   width: 100%;
   max-width: 100%;
   transition:
@@ -151,7 +159,7 @@ select {
 input:hover,
 textarea:hover,
 select:hover {
-  border-color: rgba(30, 141, 134, 0.45);
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 select {
@@ -207,11 +215,11 @@ select:invalid {
   min-width: 28px;
   min-height: 28px;
 
-  border: 1px solid rgba(30, 141, 134, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 7px;
 
-  background: var(--teal-soft);
-  color: var(--navy);
+  background: #f7f7f7;
+  color: #18181b;
 
   font-family: inherit;
   font-size: 1rem;
@@ -247,9 +255,9 @@ select:invalid {
 .searchable-input-wrap .dropdown-clear-button:hover,
 .searchable-input-wrap .dropdown-arrow-button:focus-visible,
 .searchable-input-wrap .dropdown-clear-button:focus-visible {
-  background: var(--teal-light);
-  border-color: rgba(30, 141, 134, 0.34);
-  color: var(--navy);
+  background: #f0f0f0;
+  border-color: rgba(0, 0, 0, 0.28);
+  color: #18181b;
   outline: none;
   box-shadow: none;
 }
@@ -262,9 +270,9 @@ select:invalid {
   width: 100%;
   z-index: 30;
 
-  background: linear-gradient(180deg, #ffffff 0%, var(--teal-soft) 100%);
+  background: #ffffff;
 
-  border: 1px solid rgba(30, 141, 134, 0.20);
+  border: 1px solid rgba(0, 0, 0, 0.16);
   border-radius: 10px;
 
   box-shadow: 0 12px 28px var(--form-shadow);
@@ -312,14 +320,10 @@ select:invalid {
 
 .searchable-option:hover,
 .searchable-option:focus-visible {
-  background: linear-gradient(
-    180deg,
-    var(--teal-soft),
-    rgba(30, 141, 134, 0.12)
-  );
-  color: var(--navy);
+  background: #f4f4f5;
+  color: #18181b;
   outline: none;
-  box-shadow: inset 0 0 0 1px rgba(30, 141, 134, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .searchable-empty {
@@ -330,10 +334,10 @@ select:invalid {
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid rgba(30, 141, 134, 0.24);
+  outline: 2px solid rgba(0, 0, 0, 0.12);
   outline-offset: 1px;
-  border-color: var(--teal);
-  box-shadow: 0 0 0 4px var(--form-shadow);
+  border-color: #18181b;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 640px) {
@@ -347,7 +351,7 @@ button:not(.searchable-option):not(.dropdown-arrow-button):not(.dropdown-clear-b
   padding: 11px;
   border: none;
   border-radius: 8px;
-  background: var(--teal);
+  background: #000000;
   color: white;
   font-weight: 600;
   font-size: 0.95rem;
@@ -358,8 +362,8 @@ button:not(.searchable-option):not(.dropdown-arrow-button):not(.dropdown-clear-b
 }
 
 button:not(.searchable-option):not(.dropdown-arrow-button):not(.dropdown-clear-button):hover:not(:disabled) {
-  background: var(--teal-deep);
-  box-shadow: 0 8px 18px var(--form-shadow);
+  background: #27272a;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 button:disabled {
@@ -416,10 +420,10 @@ button.secondary:hover:not(:disabled) {
 }
 
 .checkbox-item:has(input:checked) {
-  background: var(--teal-soft);
-  border-color: rgba(27, 139, 132, 0.45);
-  color: var(--navy);
-  box-shadow: 0 0 0 1px rgba(27, 139, 132, 0.08);
+  background: #f4f4f5;
+  border-color: rgba(0, 0, 0, 0.35);
+  color: #18181b;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .checkbox-item input[type="checkbox"] {
@@ -427,7 +431,7 @@ button.secondary:hover:not(:disabled) {
   height: 14px;
   padding: 0;
   margin: 0;
-  accent-color: var(--teal);
+  accent-color: #000000;
 }
 
 .auth-switch {
