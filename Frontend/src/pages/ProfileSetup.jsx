@@ -253,513 +253,525 @@ async function handleSubmit(e) {
     navigate("/dashboard");
   }
 
-  if (loading) return <div className="page-center">Loading your profile...</div>;
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#f7f7f7] px-6">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-black border-t-transparent" />
+          <p className="text-sm font-medium text-zinc-700">Loading your profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="form-page skillmatch-profile">
-      <form className="profile-card" onSubmit={handleSubmit}>
-        <div>
-          <p className="text-sm text-muted-foreground">SkillMatch · Official profile</p>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight">Tell us about your role</h1>
-        </div>
-        <p className="auth-subtitle text-sm text-muted-foreground">
-          This profile powers your competency assessment and learning recommendations.
-        </p>
-
-        {error && <div className="form-error">{error}</div>}
-
-        <label>
-          Full name
-          <input
-            value={form.full_name}
-            onChange={(e) => updateField("full_name", e.target.value)}
-            required
-          />
-        </label>
-
-        <div className="form-row">
-          <label className="searchable-field">
-            Designation
-            <div className="searchable-input-wrap">
-              <input
-                type="text"
-                className={`searchable-input ${form.designation.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
-                placeholder="e.g. Junior Statistical Officer"
-                value={form.designation}
-                onFocus={() => {
-                  if (!form.designation.trim()) {
-                    setShowDesignationSuggestions(true);
-                  }
-                }}
-                onBlur={() => window.setTimeout(() => setShowDesignationSuggestions(false), 120)}
-                onChange={(e) => {
-                  updateField("designation", e.target.value);
-                  setShowDesignationSuggestions(!e.target.value.trim());
-                }}
-                required
-                autoComplete="off"
-              />
-
-              {!form.designation.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-arrow-button"
-                  aria-label="Show designation suggestions"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => setShowDesignationSuggestions(true)}
-                >
-                  ▾
-                </button>
-              )}
-
-              {form.designation.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-clear-button"
-                  aria-label="Clear designation"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    updateField("designation", "");
-                    setShowDesignationSuggestions(false);
-                  }}
-                >
-                  ×
-                </button>
-              )}
-
-              {showDesignationSuggestions && !form.designation.trim() && (
-                <ul className="searchable-dropdown" role="listbox" aria-label="Designation suggestions">
-                  {designationSuggestions.length > 0 ? (
-                    designationSuggestions.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          className="searchable-option"
-                          onMouseDown={(e) => e.preventDefault()}
-                          onClick={() => handleDesignationSelect(item)}
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="searchable-empty">No matching designation</li>
-                  )}
-                </ul>
-              )}
+    <div className="min-h-screen bg-[#f7f7f7] px-4 py-8 sm:px-6 lg:px-8">
+      <form
+        className="mx-auto w-full max-w-5xl rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10"
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-8 border-b border-zinc-200 pb-7">
+          <div className="mb-5 flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-black text-sm font-bold text-white">
+              S
             </div>
-          </label>
-
-          <label className="searchable-field">
-            Department
-            <div className="searchable-input-wrap">
-              <input
-                type="text"
-                className={`searchable-input ${form.department.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
-                placeholder="Select or type your Ministry / Department"
-                value={form.department}
-                onFocus={() => {
-                  if (!form.department.trim()) {
-                    setShowDepartmentSuggestions(true);
-                  }
-                }}
-                onBlur={() => window.setTimeout(() => setShowDepartmentSuggestions(false), 120)}
-                onChange={(e) => {
-                  updateField("department", e.target.value);
-                  setShowDepartmentSuggestions(!e.target.value.trim());
-                }}
-                required
-                autoComplete="off"
-              />
-
-              {!form.department.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-arrow-button"
-                  aria-label="Show department suggestions"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => setShowDepartmentSuggestions(true)}
-                >
-                  ▾
-                </button>
-              )}
-
-              {form.department.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-clear-button"
-                  aria-label="Clear department"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    updateField("department", "");
-                    setShowDepartmentSuggestions(false);
-                  }}
-                >
-                  ×
-                </button>
-              )}
-
-              {showDepartmentSuggestions && !form.department.trim() && (
-                <ul className="searchable-dropdown" role="listbox" aria-label="Department suggestions">
-                  {departmentSuggestions.length > 0 ? (
-                    departmentSuggestions.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          className="searchable-option"
-                          onMouseDown={(e) => e.preventDefault()}
-                          onClick={() => handleDepartmentSelect(item)}
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="searchable-empty">No matching department</li>
-                  )}
-                </ul>
-              )}
+            <div>
+              <p className="text-sm font-semibold tracking-tight text-zinc-950">SkillMatch</p>
+              <p className="text-xs text-zinc-500">Official profile</p>
             </div>
-          </label>
-        </div>
-
-        <div className="form-row">
-          <label className="searchable-field">
-            Service / Cadre
-            <div className="searchable-input-wrap">
-              <input
-                type="text"
-                className={`searchable-input ${form.service_cadre.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
-                placeholder="Select your service"
-                value={form.service_cadre}
-                onFocus={() => {
-                  if (!form.service_cadre.trim()) {
-                    setShowServiceSuggestions(true);
-                  }
-                }}
-                onBlur={() =>
-                  window.setTimeout(
-                    () => setShowServiceSuggestions(false),
-                    120
-                  )
-                }
-                onChange={(e) => {
-                  updateField("service_cadre", e.target.value);
-                  setShowServiceSuggestions(!e.target.value.trim());
-                }}
-                required
-                autoComplete="off"
-              />
-
-              {!form.service_cadre.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-arrow-button"
-                  aria-label="Show service suggestions"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => setShowServiceSuggestions(true)}
-                >
-                  ▾
-                </button>
-              )}
-
-              {form.service_cadre.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-clear-button"
-                  aria-label="Clear service"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    updateField("service_cadre", "");
-                    setShowServiceSuggestions(false);
-                  }}
-                >
-                  ×
-                </button>
-              )}
-
-              {showServiceSuggestions && !form.service_cadre.trim() && (
-                <ul
-                  className="searchable-dropdown"
-                  role="listbox"
-                  aria-label="Service / Cadre suggestions"
-                >
-                  {serviceSuggestions.length > 0 ? (
-                    serviceSuggestions.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          className="searchable-option"
-                          onMouseDown={(e) => e.preventDefault()}
-                          onClick={() => {
-                            updateField("service_cadre", item);
-                            setShowServiceSuggestions(false);
-                          }}
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="searchable-empty">
-                      No matching service
-                    </li>
-                  )}
-                </ul>
-              )}
-            </div>
-          </label>
-
-          <label className="searchable-field">
-            Group
-            <div className="searchable-input-wrap">
-              <input
-                type="text"
-                className={`searchable-input ${form.group_level.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
-                placeholder="Select group"
-                value={form.group_level}
-                onFocus={() => {
-                  if (!form.group_level.trim()) {
-                    setShowGroupSuggestions(true);
-                  }
-                }}
-                onBlur={() =>
-                  window.setTimeout(
-                    () => setShowGroupSuggestions(false),
-                    120
-                  )
-                }
-                onChange={(e) => {
-                  updateField("group_level", e.target.value);
-                  setShowGroupSuggestions(!e.target.value.trim());
-                }}
-                required
-                autoComplete="off"
-              />
-
-              {!form.group_level.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-arrow-button"
-                  aria-label="Show group suggestions"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => setShowGroupSuggestions(true)}
-                >
-                  ▾
-                </button>
-              )}
-
-              {form.group_level.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-clear-button"
-                  aria-label="Clear group"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    updateField("group_level", "");
-                    setShowGroupSuggestions(false);
-                  }}
-                >
-                  ×
-                </button>
-              )}
-
-              {showGroupSuggestions && !form.group_level.trim() && (
-                <ul
-                  className="searchable-dropdown"
-                  role="listbox"
-                  aria-label="Group suggestions"
-                >
-                  {groupSuggestions.length > 0 ? (
-                    groupSuggestions.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          className="searchable-option"
-                          onMouseDown={(e) => e.preventDefault()}
-                          onClick={() => {
-                            updateField("group_level", item);
-                            setShowGroupSuggestions(false);
-                          }}
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="searchable-empty">
-                      No matching group
-                    </li>
-                  )}
-                </ul>
-              )}
-            </div>
-          </label>
-        </div>
-
-        <label>
-          Current job role / assignment
-          <textarea
-            placeholder="What does your day-to-day work actually involve right now?"
-            value={form.job_role}
-            onChange={(e) => updateField("job_role", e.target.value)}
-            rows={3}
-            required
-          />
-        </label>
-
-        <div className="form-row">
-          <label>
-            Current posting location
-            <input
-              placeholder="e.g. Field Office, Bengaluru"
-              value={form.posting_location}
-              onChange={(e) => updateField("posting_location", e.target.value)}
-              required
-            />
-          </label>
-
-          <label className="searchable-field">
-            Preferred learning language
-            <div className="searchable-input-wrap">
-              <input
-                type="text"
-                className={`searchable-input ${form.preferred_language.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
-                placeholder="Select a language"
-                value={form.preferred_language}
-                onFocus={() => {
-                  if (!form.preferred_language.trim()) {
-                    setShowLanguageSuggestions(true);
-                  }
-                }}
-                onBlur={() =>
-                  window.setTimeout(
-                    () => setShowLanguageSuggestions(false),
-                    120
-                  )
-                }
-                onChange={(e) => {
-                  updateField("preferred_language", e.target.value);
-                  setShowLanguageSuggestions(!e.target.value.trim());
-                }}
-                required
-                autoComplete="off"
-              />
-
-              {!form.preferred_language.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-arrow-button"
-                  aria-label="Show language suggestions"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => setShowLanguageSuggestions(true)}
-                >
-                  ▾
-                </button>
-              )}
-
-              {form.preferred_language.trim() && (
-                <button
-                  type="button"
-                  className="dropdown-clear-button"
-                  aria-label="Clear language"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    updateField("preferred_language", "");
-                    setShowLanguageSuggestions(false);
-                  }}
-                >
-                  ×
-                </button>
-              )}
-
-              {showLanguageSuggestions && !form.preferred_language.trim() && (
-                <ul
-                  className="searchable-dropdown"
-                  role="listbox"
-                  aria-label="Preferred learning language suggestions"
-                >
-                  {languageSuggestions.length > 0 ? (
-                    languageSuggestions.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          className="searchable-option"
-                          onMouseDown={(e) => e.preventDefault()}
-                          onClick={() => {
-                            updateField("preferred_language", item);
-                            setShowLanguageSuggestions(false);
-                          }}
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="searchable-empty">
-                      No matching language
-                    </li>
-                  )}
-                </ul>
-              )}
-            </div>
-          </label>
-        </div>
-
-        <div className="form-row">
-          <label>
-            Educational qualification
-            <input
-              placeholder="e.g. M.Sc Statistics"
-              value={form.education}
-              onChange={(e) => updateField("education", e.target.value)}
-              required
-            />
-          </label>
-
-          <label>
-            Years of experience
-            <input
-              type="number"
-              min="0"
-              value={form.years_experience}
-              onChange={(e) => updateField("years_experience", e.target.value)}
-              required
-            />
-          </label>
-        </div>
-
-        <fieldset className="skills-fieldset">
-          <legend>
-  Technical tools you currently use <span className="required-mark">*</span>
-</legend>
-          <div className="checkbox-grid">
-            {TECHNICAL_SKILLS.map((skill) => (
-              <label key={skill} className="checkbox-item">
-                <input
-                  type="checkbox"
-                  checked={form.technical_skills.includes(skill)}
-                  onChange={() => toggleSkill(skill)}
-                />
-                {skill}
-              </label>
-            ))}
           </div>
-        </fieldset>
 
-        <label>
-          Trainings completed so far (optional)
-          <textarea
-            placeholder="List any courses or training programmes you've already completed"
-            value={form.past_trainings}
-            onChange={(e) => updateField("past_trainings", e.target.value)}
-            rows={3}
-          />
-        </label>
+          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
+            Tell us about your role
+          </h1>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+            This profile powers your competency assessment and learning recommendations.
+          </p>
+        </div>
 
-        <button type="submit" disabled={saving}>
-          {saving ? "Saving..." : "Save and continue"}
-        </button>
+        {error && (
+          <div className="mb-7 rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-3 text-sm font-medium text-zinc-900">
+            {error}
+          </div>
+        )}
+
+        <div className="space-y-8">
+          <section>
+            <div className="mb-5">
+              <h2 className="text-base font-semibold text-zinc-950">Professional details</h2>
+              <p className="mt-1 text-sm text-zinc-500">
+                Tell us where you currently work and what your role involves.
+              </p>
+            </div>
+
+            <div className="space-y-5">
+              <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
+                Full name
+                <input
+                  className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black"
+                  value={form.full_name}
+                  onChange={(e) => updateField("full_name", e.target.value)}
+                  required
+                />
+              </label>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <label className="searchable-field !gap-2 !text-sm !font-medium !text-zinc-900">
+                  Designation
+                  <div className="searchable-input-wrap !mt-1.5">
+                    <input
+                      type="text"
+                      className={`searchable-input !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black ${form.designation.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
+                      placeholder="e.g. Junior Statistical Officer"
+                      value={form.designation}
+                      onFocus={() => {
+                        if (!form.designation.trim()) setShowDesignationSuggestions(true);
+                      }}
+                      onBlur={() => window.setTimeout(() => setShowDesignationSuggestions(false), 120)}
+                      onChange={(e) => {
+                        updateField("designation", e.target.value);
+                        setShowDesignationSuggestions(!e.target.value.trim());
+                      }}
+                      required
+                      autoComplete="off"
+                    />
+                    {!form.designation.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-arrow-button !text-zinc-500"
+                        aria-label="Show designation suggestions"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowDesignationSuggestions(true)}
+                      >
+                        ▾
+                      </button>
+                    )}
+                    {form.designation.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-clear-button !text-zinc-500"
+                        aria-label="Clear designation"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          updateField("designation", "");
+                          setShowDesignationSuggestions(false);
+                        }}
+                      >
+                        ×
+                      </button>
+                    )}
+                    {showDesignationSuggestions && !form.designation.trim() && (
+                      <ul className="searchable-dropdown" role="listbox" aria-label="Designation suggestions">
+                        {designationSuggestions.length > 0 ? (
+                          designationSuggestions.map((item) => (
+                            <li key={item}>
+                              <button
+                                type="button"
+                                className="searchable-option"
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={() => handleDesignationSelect(item)}
+                              >
+                                {item}
+                              </button>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="searchable-empty">No matching designation</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </label>
+
+                <label className="searchable-field !gap-2 !text-sm !font-medium !text-zinc-900">
+                  Department
+                  <div className="searchable-input-wrap !mt-1.5">
+                    <input
+                      type="text"
+                      className={`searchable-input !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black ${form.department.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
+                      placeholder="Select or type your Ministry / Department"
+                      value={form.department}
+                      onFocus={() => {
+                        if (!form.department.trim()) setShowDepartmentSuggestions(true);
+                      }}
+                      onBlur={() => window.setTimeout(() => setShowDepartmentSuggestions(false), 120)}
+                      onChange={(e) => {
+                        updateField("department", e.target.value);
+                        setShowDepartmentSuggestions(!e.target.value.trim());
+                      }}
+                      required
+                      autoComplete="off"
+                    />
+                    {!form.department.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-arrow-button !text-zinc-500"
+                        aria-label="Show department suggestions"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowDepartmentSuggestions(true)}
+                      >
+                        ▾
+                      </button>
+                    )}
+                    {form.department.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-clear-button !text-zinc-500"
+                        aria-label="Clear department"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          updateField("department", "");
+                          setShowDepartmentSuggestions(false);
+                        }}
+                      >
+                        ×
+                      </button>
+                    )}
+                    {showDepartmentSuggestions && !form.department.trim() && (
+                      <ul className="searchable-dropdown" role="listbox" aria-label="Department suggestions">
+                        {departmentSuggestions.length > 0 ? (
+                          departmentSuggestions.map((item) => (
+                            <li key={item}>
+                              <button
+                                type="button"
+                                className="searchable-option"
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={() => handleDepartmentSelect(item)}
+                              >
+                                {item}
+                              </button>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="searchable-empty">No matching department</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </label>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <label className="searchable-field !gap-2 !text-sm !font-medium !text-zinc-900">
+                  Service / Cadre
+                  <div className="searchable-input-wrap !mt-1.5">
+                    <input
+                      type="text"
+                      className={`searchable-input !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black ${form.service_cadre.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
+                      placeholder="Select your service"
+                      value={form.service_cadre}
+                      onFocus={() => {
+                        if (!form.service_cadre.trim()) setShowServiceSuggestions(true);
+                      }}
+                      onBlur={() => window.setTimeout(() => setShowServiceSuggestions(false), 120)}
+                      onChange={(e) => {
+                        updateField("service_cadre", e.target.value);
+                        setShowServiceSuggestions(!e.target.value.trim());
+                      }}
+                      required
+                      autoComplete="off"
+                    />
+                    {!form.service_cadre.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-arrow-button !text-zinc-500"
+                        aria-label="Show service suggestions"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowServiceSuggestions(true)}
+                      >
+                        ▾
+                      </button>
+                    )}
+                    {form.service_cadre.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-clear-button !text-zinc-500"
+                        aria-label="Clear service"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          updateField("service_cadre", "");
+                          setShowServiceSuggestions(false);
+                        }}
+                      >
+                        ×
+                      </button>
+                    )}
+                    {showServiceSuggestions && !form.service_cadre.trim() && (
+                      <ul className="searchable-dropdown" role="listbox" aria-label="Service / Cadre suggestions">
+                        {serviceSuggestions.length > 0 ? (
+                          serviceSuggestions.map((item) => (
+                            <li key={item}>
+                              <button
+                                type="button"
+                                className="searchable-option"
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={() => {
+                                  updateField("service_cadre", item);
+                                  setShowServiceSuggestions(false);
+                                }}
+                              >
+                                {item}
+                              </button>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="searchable-empty">No matching service</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </label>
+
+                <label className="searchable-field !gap-2 !text-sm !font-medium !text-zinc-900">
+                  Group
+                  <div className="searchable-input-wrap !mt-1.5">
+                    <input
+                      type="text"
+                      className={`searchable-input !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black ${form.group_level.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
+                      placeholder="Select group"
+                      value={form.group_level}
+                      onFocus={() => {
+                        if (!form.group_level.trim()) setShowGroupSuggestions(true);
+                      }}
+                      onBlur={() => window.setTimeout(() => setShowGroupSuggestions(false), 120)}
+                      onChange={(e) => {
+                        updateField("group_level", e.target.value);
+                        setShowGroupSuggestions(!e.target.value.trim());
+                      }}
+                      required
+                      autoComplete="off"
+                    />
+                    {!form.group_level.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-arrow-button !text-zinc-500"
+                        aria-label="Show group suggestions"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowGroupSuggestions(true)}
+                      >
+                        ▾
+                      </button>
+                    )}
+                    {form.group_level.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-clear-button !text-zinc-500"
+                        aria-label="Clear group"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          updateField("group_level", "");
+                          setShowGroupSuggestions(false);
+                        }}
+                      >
+                        ×
+                      </button>
+                    )}
+                    {showGroupSuggestions && !form.group_level.trim() && (
+                      <ul className="searchable-dropdown" role="listbox" aria-label="Group suggestions">
+                        {groupSuggestions.length > 0 ? (
+                          groupSuggestions.map((item) => (
+                            <li key={item}>
+                              <button
+                                type="button"
+                                className="searchable-option"
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={() => {
+                                  updateField("group_level", item);
+                                  setShowGroupSuggestions(false);
+                                }}
+                              >
+                                {item}
+                              </button>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="searchable-empty">No matching group</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </label>
+              </div>
+
+              <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
+                Current job role / assignment
+                <textarea
+                  className="!mt-1.5 !min-h-[96px] !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !py-3 !text-sm !leading-6 !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black"
+                  placeholder="What does your day-to-day work actually involve right now?"
+                  value={form.job_role}
+                  onChange={(e) => updateField("job_role", e.target.value)}
+                  rows={3}
+                  required
+                />
+              </label>
+
+              <div className="grid gap-5 md:grid-cols-2">
+                <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
+                  Current posting location
+                  <input
+                    className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black"
+                    placeholder="e.g. Field Office, Bengaluru"
+                    value={form.posting_location}
+                    onChange={(e) => updateField("posting_location", e.target.value)}
+                    required
+                  />
+                </label>
+
+                <label className="searchable-field !gap-2 !text-sm !font-medium !text-zinc-900">
+                  Preferred learning language
+                  <div className="searchable-input-wrap !mt-1.5">
+                    <input
+                      type="text"
+                      className={`searchable-input !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black ${form.preferred_language.trim() ? "has-clear-icon" : "has-dropdown-icon"}`}
+                      placeholder="Select a language"
+                      value={form.preferred_language}
+                      onFocus={() => {
+                        if (!form.preferred_language.trim()) setShowLanguageSuggestions(true);
+                      }}
+                      onBlur={() => window.setTimeout(() => setShowLanguageSuggestions(false), 120)}
+                      onChange={(e) => {
+                        updateField("preferred_language", e.target.value);
+                        setShowLanguageSuggestions(!e.target.value.trim());
+                      }}
+                      required
+                      autoComplete="off"
+                    />
+                    {!form.preferred_language.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-arrow-button !text-zinc-500"
+                        aria-label="Show language suggestions"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => setShowLanguageSuggestions(true)}
+                      >
+                        ▾
+                      </button>
+                    )}
+                    {form.preferred_language.trim() && (
+                      <button
+                        type="button"
+                        className="dropdown-clear-button !text-zinc-500"
+                        aria-label="Clear language"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          updateField("preferred_language", "");
+                          setShowLanguageSuggestions(false);
+                        }}
+                      >
+                        ×
+                      </button>
+                    )}
+                    {showLanguageSuggestions && !form.preferred_language.trim() && (
+                      <ul className="searchable-dropdown" role="listbox" aria-label="Preferred learning language suggestions">
+                        {languageSuggestions.length > 0 ? (
+                          languageSuggestions.map((item) => (
+                            <li key={item}>
+                              <button
+                                type="button"
+                                className="searchable-option"
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={() => {
+                                  updateField("preferred_language", item);
+                                  setShowLanguageSuggestions(false);
+                                }}
+                              >
+                                {item}
+                              </button>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="searchable-empty">No matching language</li>
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section className="border-t border-zinc-200 pt-8">
+            <div className="mb-5">
+              <h2 className="text-base font-semibold text-zinc-950">Experience & skills</h2>
+              <p className="mt-1 text-sm text-zinc-500">
+                These details help SkillMatch identify relevant competency gaps.
+              </p>
+            </div>
+
+            <div className="space-y-5">
+              <div className="grid gap-5 md:grid-cols-2">
+                <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
+                  Educational qualification
+                  <input
+                    className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black"
+                    placeholder="e.g. M.Sc Statistics"
+                    value={form.education}
+                    onChange={(e) => updateField("education", e.target.value)}
+                    required
+                  />
+                </label>
+
+                <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
+                  Years of experience
+                  <input
+                    className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black"
+                    type="number"
+                    min="0"
+                    value={form.years_experience}
+                    onChange={(e) => updateField("years_experience", e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+
+              <fieldset className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 sm:p-5">
+                <legend className="px-1 text-sm font-semibold text-zinc-950">
+                  Technical tools you currently use <span className="text-zinc-500">*</span>
+                </legend>
+                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {TECHNICAL_SKILLS.map((skill) => (
+                    <label
+                      key={skill}
+                      className="group flex cursor-pointer items-center gap-3 rounded-lg border border-transparent bg-white px-3 py-2.5 text-sm font-normal text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950"
+                    >
+                      <input
+                        className="h-4 w-4 rounded border-zinc-300 text-black accent-black focus:ring-black"
+                        type="checkbox"
+                        checked={form.technical_skills.includes(skill)}
+                        onChange={() => toggleSkill(skill)}
+                      />
+                      <span>{skill}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
+                Trainings completed so far <span className="font-normal text-zinc-500">(optional)</span>
+                <textarea
+                  className="!mt-1.5 !min-h-[96px] !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !py-3 !text-sm !leading-6 !text-zinc-950 placeholder:!text-zinc-400 focus:!border-black focus:!ring-1 focus:!ring-black"
+                  placeholder="List any courses or training programmes you've already completed"
+                  value={form.past_trainings}
+                  onChange={(e) => updateField("past_trainings", e.target.value)}
+                  rows={3}
+                />
+              </label>
+            </div>
+          </section>
+
+          <div className="flex flex-col-reverse gap-3 border-t border-zinc-200 pt-7 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs leading-5 text-zinc-500">
+              Your profile information is used to personalize your competency assessment.
+            </p>
+            <button
+              className="!m-0 inline-flex h-11 w-full items-center justify-center rounded-lg !bg-black px-6 text-sm font-semibold !text-white shadow-sm transition hover:!bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+              type="submit"
+              disabled={saving}
+            >
+              {saving ? "Saving..." : "Save and continue"}
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );

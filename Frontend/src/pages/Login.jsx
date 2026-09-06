@@ -26,37 +26,37 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-8">
-      <div className="grid w-full max-w-5xl overflow-hidden rounded-xl border bg-background shadow-lg lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="hidden flex-col justify-between bg-primary p-10 text-primary-foreground lg:flex">
+    <div className="flex min-h-screen items-center justify-center bg-[#f7f7f7] px-4 py-8">
+      <div className="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="hidden flex-col justify-between bg-black p-10 text-white lg:flex">
           <div>
-            <div className="text-lg font-semibold tracking-tight">SkillMatch</div>
-            <p className="mt-10 max-w-sm text-3xl font-semibold leading-tight">Competency intelligence for India's Official Statistical System.</p>
+            <div className="flex items-center gap-3"><div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-black">S</div><div className="text-lg font-semibold tracking-tight">SkillMatch</div></div>
+            <p className="mt-12 max-w-md text-4xl font-semibold leading-[1.08] tracking-tight">Competency intelligence for India's Official Statistical System.</p>
           </div>
-          <p className="text-sm text-primary-foreground/70">AI-enabled assessment · Skill-gap analysis · Learning recommendations</p>
+          <p className="text-sm text-zinc-400">AI-enabled assessment · Skill-gap analysis · Learning recommendations</p>
         </div>
 
-        <form className="space-y-6 p-6 sm:p-10" onSubmit={handleSubmit}>
+        <form className="space-y-7 p-6 sm:p-10 lg:p-12" onSubmit={handleSubmit}>
           <div>
             <p className="text-sm text-muted-foreground lg:hidden">SkillMatch</p>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight">Welcome back</h1>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-zinc-950">Welcome back</h1>
             <p className="mt-2 text-sm text-muted-foreground">Sign in to view your competency assessment.</p>
           </div>
 
           {error && <div className="rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2 text-sm text-destructive">{error}</div>}
 
           <div className="space-y-5">
-            <label className="!gap-2 !text-sm !font-medium !text-foreground">
+            <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
               Email
-              <input className="!rounded-md !border !border-input !bg-background !px-3 !py-2 !text-sm focus:!border-ring" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 focus:!border-black focus:!ring-1 focus:!ring-black" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </label>
-            <label className="!gap-2 !text-sm !font-medium !text-foreground">
+            <label className="!gap-2 !text-sm !font-medium !text-zinc-900">
               Password
-              <input className="!rounded-md !border !border-input !bg-background !px-3 !py-2 !text-sm focus:!border-ring" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <input className="!mt-1.5 !h-11 !rounded-lg !border !border-zinc-300 !bg-white !px-3.5 !text-sm !text-zinc-950 focus:!border-black focus:!ring-1 focus:!ring-black" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </label>
           </div>
 
-          <Button className="!mt-0 w-full" size="lg" type="submit" disabled={submitting}>
+          <Button className="!mt-0 h-11 w-full !rounded-lg !bg-black !text-white hover:!bg-zinc-800" size="lg" type="submit" disabled={submitting}>
             {submitting ? "Logging in…" : "Log in"}
           </Button>
 
